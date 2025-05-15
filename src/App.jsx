@@ -6,10 +6,12 @@ import TabsContainerMedals from './pages/TabsMedals/TabsContainer';
 import TabsContainerStatues from './pages/TabsStatues/TabsContainer';
 import TabsContainerCups from './pages/TabsCups/TabsContainer';
 import AdminPage from './pages/AdminPage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

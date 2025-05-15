@@ -28,7 +28,8 @@ const Header = () => {
             <div className="side-menu-content">
               <Link to="/" onClick={toggleMenu}>ГЛАВНАЯ</Link>
               <Link to="/medals" onClick={toggleMenu}>МЕДАЛИ</Link>
-              <Link to="/ribbons" onClick={toggleMenu}>НАГРАДЫ</Link>
+              <Link to="/statues" onClick={toggleMenu}>СТАТУЭТКИ</Link>
+              <Link to="/cups" onClick={toggleMenu}>КУБКИ</Link>
               <button className="order-button" onClick={() => { toggleMenu(); openCta(); }}>
                 СДЕЛАТЬ ЗАКАЗ
               </button>

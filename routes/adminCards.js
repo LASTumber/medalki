@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../db');
+const pool = require('../config/db');
 
 // 1. Получить все карточки с разделами и категориями
 router.get('/cards', async (req, res) => {
