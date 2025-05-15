@@ -5,6 +5,7 @@ import Layout from './Layout';
 import TabsContainerMedals from './pages/TabsMedals/TabsContainer';
 import TabsContainerStatues from './pages/TabsStatues/TabsContainer';
 import TabsContainerCups from './pages/TabsCups/TabsContainer';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="medals" element={<TabsContainerMedals section="medals" />} />
           <Route path="statues" element={<TabsContainerStatues section="statues" />} />
           <Route path="cups" element={<TabsContainerCups section="cups" />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Route>
       </Routes>
     </Router>
