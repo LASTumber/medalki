@@ -1,0 +1,59 @@
+.footer {
+    background: transparent;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text);
+  }
+  
+  .footer-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-logo {
+    max-width: 150px;         /* Максимальная ширина для логотипа */
+  }
+  
+  .footer-center {
+    display: grid;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .footer-text {
+    font-size: 20px;
+    font-family: 'Vin Slab Pro', serif;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .footer-right-text{
+    font-size: 20px;
+    font-family: 'Vin Slab Pro', serif;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .footer-center {
+      grid-template-columns: 1fr;
+    }
+  
+    .footer-left, .footer-right {
+      margin-bottom: 20px;
+    }
+  }

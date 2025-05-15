@@ -1,0 +1,158 @@
+/* Общие стили для хедера */
+.header {
+    padding: 10px 20px;
+    color: #fff;
+    font-family: 'Vin Slab Pro', serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1002;
+    background: var(--color-primary);
+}
+
+/* Контейнер навигации с флексбоксом */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Левая и правая части навигации */
+.nav-left {
+    display: flex;
+    font-weight: bold;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Правый блок с кнопками и социальными ссылками */
+.nav-right {
+    margin-right: 35px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Стили для кнопки меню */
+.menu-button {
+    background: transparent;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    z-index: 1001;
+}
+
+/* Боковое меню */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 250px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+/* Когда боковое меню открыто */
+.side-menu.open {
+    left: 0;
+}
+
+/* Оверлей при открытом меню */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Стили для социального блока */
+.social-links {
+    display: flex;
+    align-items: center;
+}
+
+.social-text {
+    display: flex;
+    font-size: 20px;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Стили для кнопки заказа */
+.order-button {
+    background: #fff;
+    color: #333;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-family: 'Vin Slab Pro', serif;
+    font-size: 18px;
+}
+
+/* Стили для кнопки на мобильных */
+@media (max-width: 768px) {
+    /* Скрываем десктопное меню */
+    .nav-links {
+        display: none;
+    }
+    .menu-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .menu-button {
+        display: block;
+    }
+
+    /* Скрываем кнопку заказа в правом блоке на мобильных */
+    .nav-right .order-button {
+        display: none;
+    }
+
+    /* Выравнивание ссылок по правой стороне в боковом меню */
+    .side-menu-content {
+        display: flex;
+        color: black;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 20px;
+    }
+
+    /* Кнопка заказа внизу бокового меню */
+    .side-menu-content .order-button {
+        margin-top: auto; 
+        background-color: var(--color-secondary);
+        display: block;
+    }
+}
+
+/* Стили для обычных экранов, при которых меню всегда видно */
+@media (min-width: 769px) {
+    .menu-container {
+        display: none;
+    }
+    .side-menu {
+        display: none;
+    }
+    .nav-links {
+        display: flex;
+        font-size: 20px;
+        gap: 20px;
+        align-items: center;
+    }
+}

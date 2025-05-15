@@ -1,0 +1,130 @@
+.cta-section {
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 20px;
+  }
+  
+  .cta-content h2 {
+    font-size: 2.5rem;
+    font-family: 'Vin Slab Pro', serif;
+    padding: auto;
+  }
+  
+  .cta-subtitle {
+    font-size: 20px;
+    font-family: 'Vin Slab Pro', serif;
+    padding: 1rem;
+  }
+  
+  .cta-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .cta-form-left,
+  .cta-form-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .cta-input,
+  .cta-textarea {
+    padding: 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: var(--color-text);
+  }
+  
+  .cta-input::placeholder,
+  .cta-textarea::placeholder {
+    color: rgba(51, 51, 51, 0.3);
+  }
+  
+  .cta-textarea {
+    height: 150px;
+    resize: none;
+  }
+  
+  .cta-submit-button {
+    background-color: orange;
+    color: white;
+    font-size: 1rem;
+    padding: 15px 30px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: all 0.3s;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .cta-submit-button:hover {
+    background-color: #f2f2f2;
+  }
+  
+  /* Адаптивные стили для мобильных устройств */
+  @media (max-width: 768px) {
+    .cta-form {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .cta-form-left,
+    .cta-form-right {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+    }
+  
+    .cta-submit-button {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cta-section {
+      padding: 40px 15px;
+    }
+  
+    .cta-content h2 {
+      font-size: 1.5rem;
+    }
+  
+    .cta-input,
+    .cta-textarea {
+      font-size: 0.9rem;
+      padding: 12px;
+    }
+  
+    .cta-submit-button {
+      font-size: 0.9rem;
+      padding: 12px 25px;
+    }
+  }
+  
+  
+  @media (max-width: 768px) {
+    .types-grid {
+      grid-template-columns: 1fr;
+    }
+    .cta-buttons {
+      flex-direction: column;
+    }
+  }
