@@ -37,7 +37,8 @@ const Header = () => {
           <div className="nav-links">
             <Link to="/">ГЛАВНАЯ</Link>
             <Link to="/medals">МЕДАЛИ</Link>
-            <Link to="/ribbons">НАГРАДЫ</Link>
+            <Link to="/statues">СТАТУЭТКИ</Link>
+            <Link to="/cups">КУБКИ</Link>
           </div>
         </div>
 

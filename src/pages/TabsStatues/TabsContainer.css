@@ -1,0 +1,24 @@
+.tabs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px;
+    font-family: sans-serif;
+  }
+  
+  .tabs-container__title {
+    text-align: center;
+    font-family: 'Vin Slab Pro', serif;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  
+  .tabs-container__status {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  
+  .tabs-container__error {
+    color: red;
+  }
+  
