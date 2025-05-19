@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ImageCarousel.css';
 
 const ImageCarousel = ({ images, autoPlayInterval = 8000 }) => {
   const [current, setCurrent] = useState(0);
-  const timeoutRef = useRef(null);
 
   const nextSlide = () => {
     setCurrent((prev) => (prev + 1) % images.length);

@@ -9,7 +9,7 @@ const MedalTypesSection = ({ types }) => (
       {types.map((medal) => (
         <Link
           key={medal.type}
-          to={`/products/${medal.type}`}            // передаём tab через URL-параметр
+          to={`/medals`}
           className="type-card"
         >
           <img src={medal.image} alt={medal.title} className="type-card__img" />
