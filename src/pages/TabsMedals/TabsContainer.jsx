@@ -14,7 +14,6 @@ const tabList = [
   { key: 'tab6', label: 'ИЗ ЗАГОТОВОК' },
 ];
 
-// ⚠️ Добавляем prop section
 export default function TabsContainer({ section }) {
   const [activeTab, setActiveTab] = useState(tabList[0].key);
   const [cards, setCards] = useState([]);
@@ -28,7 +27,7 @@ export default function TabsContainer({ section }) {
     api
       .get('/cards', {
         params: {
-          section,        // ← передаём в запрос, например "cups"
+          section,
           category: activeTab, // ← "tab1", "tab2" и т.д.
         },
       })
