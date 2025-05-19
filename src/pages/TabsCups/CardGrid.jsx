@@ -1,4 +1,3 @@
-// src/pages/Tabs/CardGrid.jsx
 import React, { useState } from 'react';
 import Modal from '../../components/Modal/Modal';
 import CTAModal from '../../components/CTAModal/CTAModal';
@@ -11,16 +10,13 @@ export default function CardGrid({ cards }) {
   const [selectedCard,   setSelectedCard]   = useState(null);
 
   // CTA-модал
-  const [ctaOpen, setCtaOpen]             = useState(false);
+  const [ctaOpen, setCtaOpen] = useState(false);
 
-  // Клик по плитке — открываем карточечный модал
   const onCardClick = card => {
     setSelectedCard(card);
     setCardModalOpen(true);
   };
 
-  // «Заказать похожую» из карточечного модала
-  // — закрываем его и сразу открываем CTA-модал
   const handleOrderSimilar = () => {
     setCardModalOpen(false);
     setCtaOpen(true);
@@ -30,16 +26,22 @@ export default function CardGrid({ cards }) {
     <>
       {/* Карточки */}
       <div className="card-grid">
-        {cards.map(card => (
+        {cards.length > 0 ? cards.map(card => (
           <div
             key={card.id}
             className="card"
             onClick={() => onCardClick(card)}
           >
-            <img src={card.imageUrl} alt={card.title} />
-            <h3>{card.title}</h3>
+            <img
+              src={card.imageUrl}
+              alt={card.title}
+              className="card__image"
+            />
+            <h3 className="card__title">{card.title}</h3>
           </div>
-        ))}
+        )) : (
+          <div className="card-grid__empty">Нет доступных карточек</div>
+        )}
       </div>
 
       {/* Карточечный модал */}
@@ -50,7 +52,7 @@ export default function CardGrid({ cards }) {
         onOrder={handleOrderSimilar}
       />
 
-      {/* CTA-модал — его анимацию и размонтирование уже обрабатывает CTAModal */}
+      {/* CTA-модал */}
       <CTAModal isOpen={ctaOpen} onClose={() => setCtaOpen(false)}>
         <CTASection />
       </CTAModal>

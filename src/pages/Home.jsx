@@ -4,62 +4,53 @@ import WorkStages from '../components/Advantages/WorkStages';
 import MedalTypesSection from '../components/MedalCarousel/MedalTypesSection';
 import CTASection from '../components/CTASection/CTASection';
 import ImageCarousel from '../components/ImageCarousel/ImageCarousel';
-import steel from '../images/steel.jpg';
-import cast from '../images/cast.jpg';
-import acrylic from '../images/acrylic.jpeg';
-import multilay from '../images/multilay.jpg';
-import copyright from '../images/copyright.jpg';
-import blank from '../images/blank.jpg';
-import sale1 from '../images/sale1.jpg';
-import sale2 from '../images/sale2.png';
-import sale3 from '../images/sale3.png';
-import adv1 from '../images/adv4.png';
-import adv2 from '../images/adv1.png';
-import adv3 from '../images/adv3.png';
-import adv4 from '../images/adv2.png';
-
 
 const Home = () => {
+  // Базовый путь к public (на случай деплоя в подпапке)
+  const base = process.env.PUBLIC_URL || '';
+
   const workStages = [
     { 
-      title: "ПРОИЗВОДСТВО", 
-      description: "МЕСТНОЕ ПРОИЗВОДСТВО ГАРАНТИРУЕТ НИЗКУЮ СТОИМОСТЬ", 
-      image: adv1
+      title: 'ПРОИЗВОДСТВО', 
+      description: 'МЕСТНОЕ ПРОИЗВОДСТВО ГАРАНТИРУЕТ НИЗКУЮ СТОИМОСТЬ', 
+      image: `${base}/images/adv4.png`,
     },
     { 
-      title: "ГИБКОСТЬ",   
-      description: "ИЗГОТОВИМ МЕДАЛЬ ЛЮБОГО ФОРМАТА, МАТЕРИАЛА И РАЗМЕРА", 
-      image: adv2
+      title: 'ГИБКОСТЬ',   
+      description: 'ИЗГОТОВИМ МЕДАЛЬ ЛЮБОГО ФОРМАТА, МАТЕРИАЛА И РАЗМЕРА', 
+      image: `${base}/images/adv1.png`,
     },
     { 
-      title: "ДИЗАЙН",    
-      description: "СОЗДАДИМ УНИКАЛЬНЫЙ ДИЗАЙН ПО ВАШИМ ПРЕДПОЧТЕНИЯМ", 
-      image: adv3
+      title: 'ДИЗАЙН',    
+      description: 'СОЗДАДИМ УНИКАЛЬНЫЙ ДИЗАЙН ПО ВАШИМ ПРЕДПОЧТЕНИЯМ', 
+      image: `${base}/images/adv3.png`,
     },
     { 
-      title: "ОПЕРАТИВНОСТЬ", 
-      description: "СРОКИ ПРОИЗВОДСТВА ВСЕГО ОТ 5 ДНЕЙ", 
-      image: adv4
+      title: 'ОПЕРАТИВНОСТЬ', 
+      description: 'СРОКИ ПРОИЗВОДСТВА ВСЕГО ОТ 5 ДНЕЙ', 
+      image: `${base}/images/adv2.png`,
     }
   ];
 
   const medalTypes = [
-    { type: 'cast',   title: 'Литые медали',   image: cast },
-    { type: 'steel',  title: 'Стальные медали', image: steel },
-    { type: 'acrylic',title: 'Акриловые медали', image: acrylic },
-    { type: 'multilay',title: 'Многослойные медали', image: multilay },
-    { type: 'copyright',title: 'Авторские медали', image: copyright },
-    { type: 'blank',title: 'Медали из заготовок', image: blank }
+    { type: 'cast',    title: 'Литые медали',           image: `${base}/images/cast.jpg` },
+    { type: 'steel',   title: 'Стальные медали',        image: `${base}/images/steel.jpg` },
+    { type: 'acrylic', title: 'Акриловые медали',       image: `${base}/images/acrylic.jpeg` },
+    { type: 'multilay',title: 'Многослойные медали',    image: `${base}/images/multilay.jpg` },
+    { type: 'copyright', title: 'Авторские медали',     image: `${base}/images/copyright.jpg` },
+    { type: 'blank',   title: 'Медали из заготовок',    image: `${base}/images/blank.jpg` }
   ];
 
   const imageArray = [
-      sale1, sale2, sale3
+    `${base}/images/sale1.jpg`,
+    `${base}/images/sale2.png`,
+    `${base}/images/sale3.png`,
   ];
 
   return (
     <div className="home-page">
       <HeroSection />
-      <ImageCarousel images={imageArray}/>
+      <ImageCarousel images={imageArray} />
       <MedalTypesSection types={medalTypes} />
       <WorkStages stages={workStages} />
       <CTASection />
