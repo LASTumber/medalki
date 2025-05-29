@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 const adminCards   = require('./routes/adminCards');
 const schemaRoutes = require('./routes/schema');
 const sendEmailRouter = require('./routes/send-email');
+const authRoutes = require('./routes/auth');
 
 const app  = express();
 const port = process.env.PORT || 3001;
@@ -14,6 +15,7 @@ const port = process.env.PORT || 3001;
 // Подключаем парсеры и CORS
 app.use(cors());
 app.use(express.json());
+app.use('/api/auth', authRoutes);
 
 // Настройка Nodemailer транспорта
 const transporter = nodemailer.createTransport({
