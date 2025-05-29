@@ -1,6 +1,7 @@
 // routes/send-email.js
 const express = require('express');
 const nodemailer = require('nodemailer');
+const updatePurchaseCounts = require('./utils/updatePurchaseCount');
 
 const router = express.Router();
 
@@ -26,33 +27,45 @@ transporter.verify(error => {
 
 // POST /api/send-email
 router.post('/send-email', async (req, res) => {
-  const { name, phone, email, comment } = req.body;
+  const { name, phone, email, comment, cardIds } = req.body;
 
-  if (!name || !phone || !email) {
-    return res.status(400).json({ error: 'Обязательные поля: name, phone, email' });
+  if (!name || !phone || !email || !Array.isArray(cardIds)) {
+    return res.status(400).json({
+      error: 'Обязательные поля: name, phone, email, cardIds[]',
+    });
   }
 
   const mailOptions = {
     from: `"Заявка с сайта" <${process.env.SMTP_USER}>`,
-    to: 'rufer463@gmail.com', // фиксированный получатель
+    to: `${email}, ${process.env.NOTIFY_EMAIL}`,
     subject: `Новая заявка от ${name}`,
-    text: `Имя: ${name}\nТелефон: ${phone}\nEmail клиента: ${email}\nКомментарий: ${comment || '-'}`,
+    text: `
+      Имя: ${name}
+      Телефон: ${phone}
+      Email клиента: ${email}
+      Комментарий: ${comment || '-'}
+      Товары: ${cardIds.join(', ')}`,
     html: `
       <h2>Новая заявка с сайта</h2>
       <p><strong>Имя:</strong> ${name}</p>
       <p><strong>Телефон:</strong> ${phone}</p>
       <p><strong>Email клиента:</strong> ${email}</p>
       <p><strong>Комментарий:</strong> ${comment || '-'}</p>
+      <p><strong>Товары:</strong> ${cardIds.join(', ')}</p>
     `,
   };
 
   try {
     const info = await transporter.sendMail(mailOptions);
     console.log('📩 Письмо отправлено:', info.messageId);
+
+    // Обновление счётчиков покупок
+    await updatePurchaseCounts(cardIds);
+
     res.status(200).json({ success: true });
   } catch (error) {
-    console.error('❌ Ошибка при отправке письма:', error);
-    res.status(500).json({ error: 'Не удалось отправить письмо' });
+    console.error('❌ Ошибка при отправке письма или обновлении:', error);
+    res.status(500).json({ error: 'Не удалось отправить письмо или обновить покупки' });
   }
 });
 

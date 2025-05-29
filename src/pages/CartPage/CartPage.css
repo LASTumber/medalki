@@ -75,3 +75,14 @@
 .cart-order-btn:hover {
   background: var(--color-secondary);
 }
+
+
+.order-status {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #28a745; /* зелёный для успеха */
+}
+
+.order-status.error {
+  color: #dc3545; /* красный для ошибки */
+}

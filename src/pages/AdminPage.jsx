@@ -112,7 +112,7 @@ function AdminPage() {
       <table>
         <thead>
           <tr>
-            <th>ID</th><th>Раздел</th><th>Категория</th><th>Название</th><th>URL картинки</th><th>Действия</th>
+            <th>ID</th><th>Раздел</th><th>Категория</th><th>Название</th><th>URL картинки</th><th>Действия</th><th>Куплено</th>
           </tr>
         </thead>
         <tbody>
@@ -127,6 +127,7 @@ function AdminPage() {
                 <button onClick={() => startEdit(c)}>✏️</button>
                 <button onClick={() => handleDelete(c.id)}>🗑️</button>
               </td>
+              <td>{c.purchases_count || 0}</td>
             </tr>
           ))}
         </tbody>
