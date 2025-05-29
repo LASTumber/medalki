@@ -1,46 +1,59 @@
+// src/pages/context/AuthContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 import api from '../../api';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [user, setUser]     = useState(null);
+  const [token, setToken]   = useState(() => localStorage.getItem('token'));
+  const [loading, setLoading] = useState(true);
 
-  // При загрузке приложения пытаемся получить профиль пользователя по токену
+  // При изменении токена — сохраняем в localStorage и ставим в axios
   useEffect(() => {
     if (token) {
-      api.get('/auth/me', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      localStorage.setItem('token', token);
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+      localStorage.removeItem('token');
+      delete api.defaults.headers.common['Authorization'];
+    }
+  }, [token]);
+
+  // При старте приложения проверяем токен
+  useEffect(() => {
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+    // Заголовок уже установлен предыдущим useEffect’ом
+    api.get('/auth/me')
       .then(res => {
         setUser(res.data);
       })
       .catch(() => {
-        // Токен невалиден или сервер недоступен — очищаем
-        setUser(null);
+        // Если токен невалиден — сбрасываем
         setToken(null);
-        localStorage.removeItem('token');
+        setUser(null);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    }
   }, [token]);
 
-  // Функция входа — сохраняет токен и данные пользователя
-  const login = (token, user) => {
-    setToken(token);
-    setUser(user);
-    localStorage.setItem('token', token);
+  const login = (newToken, userData) => {
+    setToken(newToken);
+    setUser(userData);
+    // не нужно вручную сохранять в localStorage или axios — это сделает первый useEffect
   };
 
-  // Функция выхода — очищает всё
   const logout = () => {
     setToken(null);
     setUser(null);
-    localStorage.removeItem('token');
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

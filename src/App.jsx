@@ -1,5 +1,6 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 import Home from './pages/Home';
 import Layout from './Layout';
 import TabsContainerMedals from './pages/TabsMedals/TabsContainer';
@@ -10,11 +11,18 @@ import ScrollToTop from './components/ScrollToTop';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Dashboard from './pages/Dashboard';
-import { AuthProvider } from './pages/context/AuthContext';
+import CartPage from './pages/CartPage/CartPage';
+
+import { AuthContext } from './pages/context/AuthContext';
+
+
+const PrivateRoute = ({ children }) => {
+  const { user } = useContext(AuthContext);
+  return user ? children : <Navigate to="/login" replace />;
+};
 
 function App() {
   return (
-    <AuthProvider>
       <Router>
         <ScrollToTop />
         <Routes>
@@ -23,14 +31,30 @@ function App() {
             <Route path="medals" element={<TabsContainerMedals section="medals" />} />
             <Route path="statues" element={<TabsContainerStatues section="statues" />} />
             <Route path="cups" element={<TabsContainerCups section="cups" />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="admin" element={<AdminPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
-            <Route path="dashboard" element={<Dashboard />} />
+
+            {/* Защищённые маршруты */}
+            <Route
+              path="dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="cart"
+              element={
+                <PrivateRoute>
+                  <CartPage />
+                </PrivateRoute>
+              }
+            />
           </Route>
         </Routes>
-      </Router>
-    </AuthProvider>
+    </Router>
   );
 }
 

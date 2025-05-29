@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
+import { CartContext } from '../../pages/context/CartContext'
 import './Modal.css';
 
 export default function Modal({ isOpen, onClose, card, onOrder }) {
   const [visible, setVisible] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
   // Анимация открытия/закрытия
   useEffect(() => {
@@ -37,13 +39,11 @@ export default function Modal({ isOpen, onClose, card, onOrder }) {
           <button
             className="modal-order-btn"
             onClick={() => {
-              // Сначала закрываем карточный модал,
-              // затем вызываем onOrder для открытия CTA
+              addToCart();
               onClose();
-              onOrder();
             }}
           >
-            ЗАКАЗАТЬ ПОХОЖУЮ
+            В КОРЗИНУ
           </button>
         </div>
         <button className="modal-close" onClick={onClose}>×</button>
