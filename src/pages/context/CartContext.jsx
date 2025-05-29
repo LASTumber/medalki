@@ -1,39 +1,49 @@
-// src/context/CartContext.jsx
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { AuthContext } from './AuthContext';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [cart, setCart] = useState([]);
 
-  // Загружаем корзину при изменении user
+  // Загружаем корзину из localStorage после авторизации
   useEffect(() => {
-    if (!user) {
-      // Если нет пользователя — очищаем корзину
-      setCart([]);
-      return;
-    }
-    // Пользователь есть — грузим его корзину
+  if (loading) return;
+
+  if (!user || !user.id) {
+    setCart([]);
+    return;
+  }
+
+  try {
     const saved = localStorage.getItem(`cart_${user.id}`);
     setCart(saved ? JSON.parse(saved) : []);
-  }, [user]);
+  } catch (e) {
+    console.error('Ошибка при чтении корзины из localStorage:', e);
+    setCart([]);
+  }
+}, [user, loading]);
 
-  // Сохраняем корзину при её изменении
-  useEffect(() => {
-    if (!user) return; // если нет пользователя — не сохраняем
+useEffect(() => {
+  if (loading || !user?.id) return;
+
+  try {
     localStorage.setItem(`cart_${user.id}`, JSON.stringify(cart));
-  }, [cart, user]);
+  } catch (e) {
+    console.error('Ошибка при сохранении корзины в localStorage:', e);
+  }
+}, [cart, user, loading]);
 
-  const addToCart = item => {
+
+  const addToCart = (item) => {
     setCart(prev => {
       if (prev.find(i => i.id === item.id)) return prev;
       return [...prev, item];
     });
   };
 
-  const removeFromCart = id => {
+  const removeFromCart = (id) => {
     setCart(prev => prev.filter(i => i.id !== id));
   };
 

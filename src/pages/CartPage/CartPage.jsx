@@ -1,11 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/CartContext';
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal/Modal';
 import './CartPage.css';
 
 export default function CartPage() {
   const { cart, removeFromCart } = useContext(CartContext);
-  const [modalItem, setModalItem] = React.useState(null);
+  const { user, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [modalItem, setModalItem] = useState(null);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/login');
+    }
+  }, [user, loading, navigate]);
+
+  if (loading) return null; // или return <Spinner />
 
   return (
     <div className="cart-container">

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FiShoppingCart } from 'react-icons/fi';
 import CTAModal from '../CTAModal/CTAModal';
 import CTASection from '../CTASection/CTASection';
 import { AuthContext } from '../../pages/context/AuthContext';
@@ -80,7 +81,17 @@ const Header = () => {
               </a>
             </div>
           </div>
-          {/* Кнопка авторизации либо бейдж */}
+
+          {user && (
+            <div
+              className="cart-icon"
+              onClick={() => navigate('/cart')}
+              title="Перейти в корзину"
+            >
+              <FiShoppingCart size={24} />
+            </div>
+          )}
+
           {!user ? (
             <Link to="/login" className="auth-button">
               ВОЙТИ

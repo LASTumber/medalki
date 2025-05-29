@@ -204,10 +204,12 @@
   gap: 20px;
 }
 
-/* Для мобильного: покажем бейдж/войти в боковом меню */
-@media (max-width: 768px) {
-  .side-menu-content .auth-button,
-  .side-menu-content .user-badge {
-    margin-top: 20px;
-  }
+.cart-icon {
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.cart-icon:hover {
+  color: var(--color-secondary);
 }
