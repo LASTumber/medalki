@@ -40,16 +40,6 @@ const Header = () => {
               >
                 СДЕЛАТЬ ЗАКАЗ
               </button>
-              {!user && (
-                <Link to="/login" className="auth-button" onClick={toggleMenu}>
-                  ВОЙТИ
-                </Link>
-              )}
-              {user && (
-                <div className="user-badge" onClick={() => { toggleMenu(); navigate('/dashboard'); }}>
-                  {user.id}
-                </div>
-              )}
             </div>
           </div>
           <div className="nav-links">

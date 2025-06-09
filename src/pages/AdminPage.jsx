@@ -102,7 +102,7 @@ function AdminPage() {
         </label>
         <label>
           URL картинки:
-          <input name="imageUrl" value={form.imageUrl} onChange={handleChange} placeholder="/images/your.jpg" />
+          <input name="imageUrl" value={form.imageUrl} onChange={handleChange} placeholder="/images/catalog/your.jpg" />
         </label>
         <button type="submit">{editingId ? 'Сохранить' : 'Добавить'}</button>
         {editingId && <button type="button" onClick={cancelEdit}>Отмена</button>}

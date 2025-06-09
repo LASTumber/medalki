@@ -1,4 +1,3 @@
-// routes/send-email.js
 const express = require('express');
 const nodemailer = require('nodemailer');
 const updatePurchaseCounts = require('./utils/updatePurchaseCount');

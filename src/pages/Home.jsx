@@ -6,7 +6,6 @@ import CTASection from '../components/CTASection/CTASection';
 import ImageCarousel from '../components/ImageCarousel/ImageCarousel';
 
 const Home = () => {
-  // Базовый путь к public (на случай деплоя в подпапке)
   const base = process.env.PUBLIC_URL || '';
 
   const workStages = [
