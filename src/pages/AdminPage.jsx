@@ -102,7 +102,7 @@ function AdminPage() {
         </label>
         <label>
           URL картинки:
-          <input name="imageUrl" value={form.imageUrl} onChange={handleChange} placeholder="/images/your.jpg" />
+          <input name="imageUrl" value={form.imageUrl} onChange={handleChange} placeholder="/images/catalog/your.jpg" />
         </label>
         <button type="submit">{editingId ? 'Сохранить' : 'Добавить'}</button>
         {editingId && <button type="button" onClick={cancelEdit}>Отмена</button>}
@@ -112,7 +112,7 @@ function AdminPage() {
       <table>
         <thead>
           <tr>
-            <th>ID</th><th>Раздел</th><th>Категория</th><th>Название</th><th>URL картинки</th><th>Действия</th>
+            <th>ID</th><th>Раздел</th><th>Категория</th><th>Название</th><th>URL картинки</th><th>Действия</th><th>Куплено</th>
           </tr>
         </thead>
         <tbody>
@@ -127,6 +127,7 @@ function AdminPage() {
                 <button onClick={() => startEdit(c)}>✏️</button>
                 <button onClick={() => handleDelete(c.id)}>🗑️</button>
               </td>
+              <td>{c.purchases_count || 0}</td>
             </tr>
           ))}
         </tbody>

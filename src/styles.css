@@ -63,24 +63,6 @@ main {
   overflow-x: hidden;
 }
 
-.medal-types {
-  padding: 80px 20px;
-  text-align: center;
-}
-
-.medal-types h2{
-  color: #fff;
-  font-family: 'Vin Slab Pro', serif;
-  font-size: 35px;
-}
-
-.types-grid {
-  display: flex;
-  overflow-x: scroll;
-  gap: 20px;
-  padding-bottom: 20px;
-}
-
 .type-overlay {
   position: absolute;
   bottom: 0;

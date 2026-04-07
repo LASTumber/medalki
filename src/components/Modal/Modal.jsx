@@ -1,23 +1,40 @@
-import React, { useState, useEffect } from 'react';
+// src/components/Modal/Modal.jsx
+
+import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
+import { CartContext } from '../../pages/context/CartContext';
+import { AuthContext } from '../../pages/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-export default function Modal({ isOpen, onClose, card, onOrder }) {
+export default function Modal({ isOpen, onClose, card }) {
   const [visible, setVisible] = useState(false);
+  const { addToCart } = useContext(CartContext);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // Анимация открытия/закрытия
   useEffect(() => {
     if (isOpen) {
-      // Ждём кадр, чтобы вставить класс .open и запустить открытие
+      // Ждём кадр, чтобы вставить класс .open
       requestAnimationFrame(() => setVisible(true));
     } else {
-      // Снимаем класс .open, чтобы запустить закрытие
       setVisible(false);
     }
   }, [isOpen]);
 
-  // Не монтируем в DOM, пока не открыт и не завершилась анимация закрытия
+  // Пока закрыто и анимация закрытия не завершилась — null
   if (!isOpen && !visible) return null;
+
+  const handleAddToCart = () => {
+    onClose();
+    if (!user) {
+      // Гость — перенаправляем на логин
+      navigate('/login');
+    } else {
+      addToCart(card);
+    }
+  };
 
   return ReactDOM.createPortal(
     <div
@@ -36,14 +53,9 @@ export default function Modal({ isOpen, onClose, card, onOrder }) {
           <p className="modal-desc">{card.description}</p>
           <button
             className="modal-order-btn"
-            onClick={() => {
-              // Сначала закрываем карточный модал,
-              // затем вызываем onOrder для открытия CTA
-              onClose();
-              onOrder();
-            }}
+            onClick={handleAddToCart}
           >
-            ЗАКАЗАТЬ ПОХОЖУЮ
+            В КОРЗИНУ
           </button>
         </div>
         <button className="modal-close" onClick={onClose}>×</button>

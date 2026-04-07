@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FiShoppingCart } from 'react-icons/fi';
 import CTAModal from '../CTAModal/CTAModal';
 import CTASection from '../CTASection/CTASection';
+import { AuthContext } from '../../pages/context/AuthContext';
 import './Header.css';
 import '../CTAModal/CTAModal.css';
 
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isCtaOpen, setCtaOpen]   = useState(false);
-  const base = process.env.PUBLIC_URL || '';
+  const { user }          = useContext(AuthContext);
+  const navigate                  = useNavigate();
+  const base                      = process.env.PUBLIC_URL || '';
 
   const toggleMenu = () => setMenuOpen(open => !open);
   const openCta    = () => setCtaOpen(true);
@@ -46,7 +50,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Правая часть со ссылками */}
+        {/* Правая часть со ссылками */}  
         <div className="nav-right">
           <button className="order-button" onClick={openCta}>
             СДЕЛАТЬ ЗАКАЗ
@@ -60,17 +64,37 @@ const Header = () => {
             />
             <div className="social-text">
               <a href="https://wa.me/79998887766" target="_blank" rel="noreferrer">
-                +7 999 888 77 66
+                +7 999 888 77 66
               </a>
               <a href="https://wa.me/79871732778" target="_blank" rel="noreferrer">
-                +7 987 173 27 78
+                +7 987 173 27 78
               </a>
             </div>
           </div>
+
+          {user && (
+            <div
+              className="cart-icon"
+              onClick={() => navigate('/cart')}
+              title="Перейти в корзину"
+            >
+              <FiShoppingCart size={24} />
+            </div>
+          )}
+
+          {!user ? (
+            <Link to="/login" className="auth-button">
+              ВОЙТИ
+            </Link>
+          ) : (
+            <div className="user-badge" onClick={() => navigate('/dashboard')}>
+              {user.id}
+            </div>
+          )}
         </div>
       </nav>
 
-      {/* === Модалка CTA === */}
+      {/* CTA-модал */}
       {isCtaOpen && (
         <CTAModal isOpen={isCtaOpen} onClose={closeCta}>
           <CTASection />

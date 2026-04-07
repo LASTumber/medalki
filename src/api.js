@@ -1,4 +1,3 @@
-// src/api.js
 import axios from 'axios';
 
 const DEV_API = process.env.REACT_APP_API_URL; // например "http://localhost:3001"

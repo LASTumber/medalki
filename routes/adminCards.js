@@ -7,11 +7,13 @@ router.get('/cards', async (req, res) => {
   try {
     const [rows] = await pool.query(
       `SELECT c.id, s.name AS section, cat.name AS category,
-              c.title, c.description, c.image_url AS imageUrl
-       FROM cards c
-       JOIN categories cat ON c.category_id = cat.id
-       JOIN sections s     ON cat.section_id = s.id
-       ORDER BY c.id`);
+              c.title, c.description, c.image_url AS imageUrl,
+              c.purchases_count
+      FROM cards c
+      JOIN categories cat ON c.category_id = cat.id
+      JOIN sections s     ON cat.section_id = s.id
+      ORDER BY c.id`
+    );
     res.json(rows);
   } catch (err) {
     console.error(err);
